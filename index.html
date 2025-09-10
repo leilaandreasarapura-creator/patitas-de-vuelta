@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATITAS DE VUELTA - Encuentra tu mascota</title>
+    <meta name="description" content="Plataforma colaborativa para encontrar mascotas perdidas durante la Fiesta del Milagro en Salta">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiUEFUSVRBUyBERSBWVUVMVEEiLCJzaG9ydF9uYW1lIjoiUEFUSVRBUyIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsInRoZW1lX2NvbG9yIjoiIzhCMDAwMCIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeU5EQWdNalF3SWlCM2FXUjBhRDBpTWpRd0lpQm9aV2xuYUhROUlqSTBNQ0krUEhCaGRHZ2daRDBpVFRreE5Ua3VOallnT0RndU9UTm9MVGxzTFRWMklERnNMVFV1TnpOb0xUa3VOamxtTmpJdU5qSTJJREUxTGpRek5URXRNems0TGpBMk5TMHpPRGd1TURZMU1USTFOUTE3YzNSeWIydGxMV1JoYzJoaGNuSmhlVG92YzNSeWIydGxMV3hwYm1WcVlXbHVPbkp2ZFc1a08zTjBjbTlyWlMxM2FXUjBhRG96TzNOMGNtOXJaUzF0YVhSbGNteHBiV2wwT2pFd08zTjBjbTlyWlMxdmNHRmphWFI1T2k0Mk9YMGlMejQ4TDNOMlp6ND0iLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B0000 0%, #000000 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #ffffff;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: #ffffff;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .nav-btn.active {
+            background: #8B0000 !important;
+            color: white !important;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8B0000 !important;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8B0000, #B71C1C) !important;
+            color: white !important;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.5) !important;
+        }
+        
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pet-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .pet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #8B0000 !important;
+        }
+        
+        .pet-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .status-lost {
+            background: #ffe6e6;
+            color: #8B0000 !important;
+        }
+        
+        .status-found {
+            background: #f0f0f0;
+            color: #000000 !important;
+        }
+        
+        .status-resolved {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .pet-image {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .pet-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-contact {
+            background: #8B0000 !important;
+            color: white !important;
+        }
+        
+        .btn-resolve {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .btn-report {
+            background: #000000 !important;
+            color: white !important;
+        }
+        
+        .btn-small:hover {
+            transform: translateY(-2px);
+        }
+        
+        .disclaimer {
+            background: #fff3cd;
+            border: 2px solid #8B0000;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 2rem 0;
+            color: #856404;
+        }
+        
+        .disclaimer strong {
+            color: #8B0000;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8B0000 !important;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .install-prompt {
+            background: linear-gradient(135deg, #8B0000, #B71C1C) !important;
+            color: white !important;
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .install-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        .captcha {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .captcha:hover {
+            border-color: #8B0000 !important;
+            background: #f5f5f5;
+        }
+        
+        .captcha.verified {
+            background: #e8f5e8;
+            border-color: #2e7d32;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .search-filters {
+                grid-template-columns: 1fr;
+            }
+            
+            .pet-actions {
+                justify-content: center;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .floating-action {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #8B0000, #B71C1C) !important;
+            color: white !important;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.6) !important;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .floating-action:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 30px rgba(139, 0, 0, 0.8) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">🐾 PATITAS DE VUELTA</h1>
+            <p class="subtitle">Plataforma colaborativa para encontrar mascotas durante la Fiesta del Milagro</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPets">0</div>
+                    <div class="stat-label">Mascotas registradas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="resolvedCases">0</div>
+                    <div class="stat-label">Casos resueltos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="activeCases">0</div>
+                    <div class="stat-label">Casos activos</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="install-prompt" id="installPrompt">
+            <p>📱 ¡Instala PATITAS DE VUELTA en tu dispositivo para acceso rápido!</p>
+            <button class="install-btn" onclick="installApp()">Instalar App</button>
+        </div>
+
+        <nav class="main-nav">
+            <button class="nav-btn active" onclick="showSection('search')">🔍 Buscar</button>
+            <button class="nav-btn" onclick="showSection('report')">📢 Reportar</button>
+            <button class="nav-btn" onclick="showSection('about')">ℹ️ Acerca de</button>
+        </nav>
+
+        <section id="search-section" class="content-section active fade-in">
+            <h2>🔍 Buscar Mascotas</h2>
+            <div class="search-filters">
+                <input type="text" id="searchQuery" placeholder="Buscar por descripción..." onkeyup="filterPets()">
+                
+                <select id="speciesFilter" onchange="filterPets()">
+                    <option value="">¿Qué mascota perdiste?</option>
+                    <option value="perro">Perro</option>
+                    <option value="gato">Gato</option>
+                    <option value="otro">Otro tipo de mascota</option>
+                </select>
+                
+                <select id="statusFilter" onchange="filterPets()">
+                    <option value="">Ayúdanos a reunir a una familia</option>
+                    <option value="perdido">Reportar una mascota perdida</option>
+                    <option value="encontrado">Reportar una mascota encontrada</option>
+                </select>
+                
+                <select id="zoneFilter" onchange="filterPets()">
+                    <option value="">¿Dónde lo viste por última vez?</option>
+                    <option value="centro">Centro</option>
+                    <option value="norte">Zona Norte</option>
+                    <option value="sur">Zona Sur</option>
+                    <option value="este">Zona Este</option>
+                    <option value="oeste">Zona Oeste</option>
+                </select>
+            </div>
+            
+            <div id="petsContainer">
+                <!-- Los reportes aparecerán aquí -->
+            </div>
+        </section>
+
+        <section id="report-section" class="content-section">
+            <h2>📢 Reportar Mascota</h2>
+            <form id="petForm">
+                <div class="form-group">
+                    <label for="petStatus">Estado de la mascota *</label>
+                    <select id="petStatus" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="perdido">🔍 Perdido - Busco mi mascota</option>
+                        <option value="encontrado">🏠 Encontrado - Encontré una mascota</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="petSpecies">Especie *</label>
+                    <select id="petSpecies" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="perro">🐕 Perro</option>
+                        <option value="gato">🐱 Gato</option>
+                        <option value="otro">🐾 Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="petName">Nombre de la mascota</label>
+                    <input type="text" id="petName" placeholder="Ej: Bobby, Mimi, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label for="petDescription">Descripción detallada *</label>
+                    <textarea id="petDescription" rows="4" required placeholder="Describe a la mascota: color, tamaño, características especiales, collar, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="petZone">Zona aproximada *</label>
+                    <select id="petZone" required>
+                        <option value="">Seleccionar zona...</option>
+                        <option value="centro">Centro (Plaza 9 de Julio, Catedral)</option>
+                        <option value="norte">Zona Norte (Av. Kennedy, Shopping)</option>
+                        <option value="sur">Zona Sur (Av. Hipólito Yrigoyen)</option>
+                        <option value="este">Zona Este (Villa San Lorenzo)</option>
+                        <option value="oeste">Zona Oeste (Cerro San Bernardo)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactName">Tu nombre *</label>
+                    <input type="text" id="contactName" required placeholder="Tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactMethod">Método de contacto preferido *</label>
+                    <select id="contactMethod" required onchange="toggleContactInfo()">
+                        <option value="">Seleccionar...</option>
+                        <option value="whatsapp">📱 WhatsApp</option>
+                        <option value="email">📧 Email</option>
+                        <option value="phone">📞 Teléfono</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="contactInfoGroup" style="display: none;">
+                    <label for="contactInfo" id="contactInfoLabel">Información de contacto *</label>
+                    <input type="text" id="contactInfo" placeholder="">
+                </div>
+
+                <div class="captcha" id="captcha" onclick="verifyCaptcha()">
+                    🤖 Click para verificar que no eres un robot
+                </div>
+
+                <button type="submit" class="btn-primary">📢 Publicar Reporte</button>
+            </form>
+        </section>
+
+        <section id="about-section" class="content-section">
+            <h2>ℹ️ Acerca de PATITAS DE VUELTA</h2>
+            <p>PATITAS DE VUELTA es una plataforma colaborativa creada especialmente para ayudar a prevenir el abandono animal y reunir mascotas con sus familias durante la Fiesta del Milagro en Salta.</p>
+            
+            <h3>🎯 Misión</h3>
+            <p>Facilitar la reunión de mascotas perdidas con sus familias y promover la adopción responsable durante eventos masivos como la Fiesta del Milagro.</p>
+            
+            <h3>📱 Características</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>🔍 Búsqueda avanzada por zona, especie y estado</li>
+                <li>📸 Subida de fotos para identificación</li>
+                <li>🌍 Diseño mobile-first y PWA instalable</li>
+                <li>🔒 Privacidad y seguridad por defecto</li>
+                <li>🚀 Sistema anti-spam y moderación</li>
+            </ul>
+
+            <h3>🛡️ Tecnología y Stack</h3>
+            <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript vanilla<br>
+            <strong>Características:</strong> PWA, Responsive Design, Local Storage<br>
+            <strong>IA Utilizada:</strong> Claude (Anthropic) para desarrollo y optimización<br>
+            <strong>Licencia:</strong> MIT</p>
+
+            <h3>🤝 Colaboración</h3>
+            <p>Este proyecto fue desarrollado para el hackathon de SaltaDev con el objetivo de crear una solución que genere impacto social positivo en nuestra comunidad salteña.</p>
+        </section>
+
+        <div class="disclaimer">
+            <strong>⚠️ Disclaimer Importante:</strong> Esta es una plataforma colaborativa. Para tu seguridad, siempre coordina encuentros en lugares públicos y seguros. No compartas información personal sensible. La plataforma no se hace responsable por los encuentros coordinados entre usuarios.
+        </div>
+    </div>
+
+    <button class="floating-action" onclick="showSection('report')" title="Reportar mascota">
+        ➕
+    </button>
+
+    <script>
+        // Estado global de la aplicación
+        let pets = [];
+        let deferredPrompt;
+        let captchaVerified = false;
+
+        // PWA Install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'block';
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((result) => {
+                    if (result.outcome === 'accepted') {
+                        console.log('PWA instalada');
+                        document.getElementById('installPrompt').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        // Navegación entre secciones
+        function showSection(sectionName) {
+            const sections = document.querySelectorAll('.content-section');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(sectionName + '-section').classList.add('active', 'fade-in');
+            event.target.classList.add('active');
+        }
+
+        // Sistema de verificación captcha simple
+        function verifyCaptcha() {
+            const captcha = document.getElementById('captcha');
+            if (!captchaVerified) {
+                captcha.innerHTML = '✅ Verificado - No eres un robot';
+                captcha.classList.add('verified');
+                captchaVerified = true;
+            }
+        }
+
+        // Manejo dinámico del formulario de contacto
+        function toggleContactInfo() {
+            const method = document.getElementById('contactMethod').value;
+            const group = document.getElementById('contactInfoGroup');
+            const label = document.getElementById('contactInfoLabel');
+            const input = document.getElementById('contactInfo');
+            
+            if (method) {
+                group.style.display = 'block';
+                switch(method) {
+                    case 'whatsapp':
+                        label.textContent = 'Número de WhatsApp (con código de país) *';
+                        input.placeholder = 'Ej: +54 9 387 123-4567';
+                        input.type = 'tel';
+                        break;
+                    case 'email':
+                        label.textContent = 'Email *';
+                        input.placeholder = 'Ej: tu@email.com';
+                        input.type = 'email';
+                        break;
+                    case 'phone':
+                        label.textContent = 'Teléfono *';
+                        input.placeholder = 'Ej: 387-123-4567';
+                        input.type = 'tel';
+                        break;
+                }
+                input.required = true;
+            } else {
+                group.style.display = 'none';
+                input.required = false;
+            }
+        }
+
+        // Envío del formulario
+        document.getElementById('petForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!captchaVerified) {
+                alert('Por favor, verifica que no eres un robot');
+                return;
+            }
+
+            const formData = {
+                id: Date.now(),
+                status: document.getElementById('petStatus').value,
+                species: document.getElementById('petSpecies').value,
+                name: document.getElementById('petName').value,
+                description: document.getElementById('petDescription').value,
+                zone: document.getElementById('petZone').value,
+                contactName: document.getElementById('contactName').value,
+                contactMethod: document.getElementById('contactMethod').value,
+                contactInfo: document.getElementById('contactInfo').value,
+                date: new Date().toLocaleDateString('es-AR'),
+                resolved: false,
+                reports: 0
+            };
+
+            // Validación básica anti-spam
+            if (formData.description.length < 10) {
+                alert('La descripción debe tener al menos 10 caracteres');
+                return;
+            }
+
+            pets.push(formData);
+            savePets();
+            updateStats();
+            renderPets();
+            
+            alert('✅ Reporte publicado exitosamente!');
+            this.reset();
+            document.getElementById('contactInfoGroup').style.display = 'none';
+            captchaVerified = false;
+            document.getElementById('captcha').innerHTML = '🤖 Click para verificar que no eres un robot';
+            document.getElementById('captcha').classList.remove('verified');
+            
+            showSection('search');
+        });
+
+        // Filtrado y búsqueda
+        function filterPets() {
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+            const species = document.getElementById('speciesFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            const zone = document.getElementById('zoneFilter').value;
+            
+            const filtered = pets.filter(pet => {
+                const matchesQuery = !query || 
+                    pet.description.toLowerCase().includes(query) ||
+                    pet.name.toLowerCase().includes(query) ||
+                    pet.contactName.toLowerCase().includes(query);
+                
+                const matchesSpecies = !species || pet.species === species;
+                const matchesStatus = !status || pet.status === status;
+                const matchesZone = !zone || pet.zone === zone;
+                
+                return matchesQuery && matchesSpecies && matchesStatus && matchesZone && !pet.resolved;
+            });
+            
+            renderFilteredPets(filtered);
+        }
+
+        // Renderizado de mascotas
+        function renderPets() {
+            const activePets = pets.filter(pet => !pet.resolved);
+            renderFilteredPets(activePets);
+        }
+
+        function renderFilteredPets(petsToRender) {
+            const container = document.getElementById('petsContainer');
+            
+            if (petsToRender.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: #666;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                        <h3>No se encontraron mascotas</h3>
+                        <p>Intenta ajustar los filtros de búsqueda</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = petsToRender.map(pet => `
+                <div class="pet-card">
+                    <div class="pet-status status-${pet.status}">
+                        ${pet.status === 'perdido' ? '🔍 PERDIDO' : '🏠 ENCONTRADO'}
+                    </div>
+                    <div class="pet-image" title="Imagen de ${pet.species}">
+                        ${getSpeciesIcon(pet.species)} ${pet.name || 'Sin nombre'}
+                    </div>
+                    <h3>${pet.name || `${pet.species.charAt(0).toUpperCase() + pet.species.slice(1)} sin nombre`}</h3>
+                    <p><strong>Descripción:</strong> ${pet.description}</p>
+                    <p><strong>Zona:</strong> ${getZoneName(pet.zone)}</p>
+                    <p><strong>Fecha:</strong> ${pet.date}</p>
+                    <p><strong>Contacto:</strong> ${pet.contactName}</p>
+                    
+                    <div class="pet-actions">
+                        <button class="btn-small btn-contact" onclick="contactOwner('${pet.id}', '${pet.contactMethod}', '${pet.contactInfo}')">
+                            📞 Contactar
+                        </button>
+                        <button class="btn-small btn-resolve" onclick="markAsResolved('${pet.id}')">
+                            ✅ Marcar como resuelto
+                        </button>
+                        <button class="btn-small btn-report" onclick="reportPost('${pet.id}')">
+                            🚨 Reportar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getSpeciesIcon(species) {
+            switch(species) {
+                case 'perro': return '🐕';
+                case 'gato': return '🐱';
+                default: return '🐾';
+            }
+        }
+
+        function getZoneName(zone) {
+            const zones = {
+                'centro': 'Centro (Plaza 9 de Julio)',
+                'norte': 'Zona Norte (Av. Kennedy)',
+                'sur': 'Zona Sur (Av. Hipólito Yrigoyen)',
+                'este': 'Zona Este (Villa San Lorenzo)',
+                'oeste': 'Zona Oeste (Cerro San Bernardo)'
+            };
+            return zones[zone] || zone;
+        }
+
+        // Funciones de interacción
+        function contactOwner(petId, method, contactInfo) {
+            const pet = pets.find(p => p.id == petId);
+            if (!pet) return;
+            
+            let contactUrl = '';
+            let message = `Hola ${pet.contactName}, vi tu publicación sobre ${pet.name || 'tu mascota'} en PATITAS DE VUELTA. `;
+            
+            switch(method) {
+                case 'whatsapp':
+                    const cleanPhone = contactInfo.replace(/[^\d]/g, '');
+                    contactUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+                    break;
+                case 'email':
+                    contactUrl = `mailto:${contactInfo}?subject=${encodeURIComponent('Sobre tu mascota en PATITAS DE VUELTA')}&body=${encodeURIComponent(message)}`;
+                    break;
+                case 'phone':
+                    contactUrl = `tel:${contactInfo}`;
+                    break;
+            }
+            
+            if (contactUrl) {
+                window.open(contactUrl, '_blank');
+            } else {
+                alert(`Contacto: ${contactInfo}`);
+            }
+        }
+
+        function markAsResolved(petId) {
+            if (confirm('¿Estás seguro de que este caso ha sido resuelto? Esta acción no se puede deshacer.')) {
+                const petIndex = pets.findIndex(p => p.id == petId);
+                if (petIndex !== -1) {
+                    pets[petIndex].resolved = true;
+                    savePets();
+                    updateStats();
+                    renderPets();
+                    alert('✅ Caso marcado como resuelto. ¡Nos alegra saber que la mascota está bien!');
+                }
+            }
+        }
+
+        function reportPost(petId) {
+            const reason = prompt('¿Por qué quieres reportar esta publicación?\n\nRazones válidas:\n- Contenido inapropiado\n- Información falsa\n- Spam\n- Otro motivo');
+            
+            if (reason && reason.trim()) {
+                const petIndex = pets.findIndex(p => p.id == petId);
+                if (petIndex !== -1) {
+                    pets[petIndex].reports = (pets[petIndex].reports || 0) + 1;
+                    
+                    // Auto-moderación: ocultar después de 3 reportes
+                    if (pets[petIndex].reports >= 3) {
+                        pets[petIndex].resolved = true;
+                        alert('⚠️ La publicación ha sido removida automáticamente por múltiples reportes.');
+                    } else {
+                        alert('📝 Reporte enviado. Gracias por ayudar a mantener la comunidad segura.');
+                    }
+                    
+                    savePets();
+                    updateStats();
+                    renderPets();
+                }
+            }
+        }
+
+        // Gestión de datos locales
+        function savePets() {
+            try {
+                const petsData = {
+                    pets: pets,
+                    lastUpdate: new Date().toISOString()
+                };
+                localStorage.setItem('patitasDeVuelta', JSON.stringify(petsData));
+            } catch (error) {
+                console.warn('No se pudo guardar en localStorage:', error);
+            }
+        }
+
+        function loadPets() {
+            try {
+                const saved = localStorage.getItem('patitasDeVuelta');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    pets = data.pets || [];
+                    
+                    // Limpiar reportes antiguos (más de 7 días)
+                    const weekAgo = new Date();
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    
+                    pets = pets.filter(pet => {
+                        const petDate = new Date(pet.date.split('/').reverse().join('-'));
+                        return petDate > weekAgo;
+                    });
+                }
+            } catch (error) {
+                console.warn('Error cargando datos:', error);
+                pets = [];
+            }
+        }
+
+        function updateStats() {
+            const total = pets.length;
+            const resolved = pets.filter(p => p.resolved).length;
+            const active = total - resolved;
+            
+            document.getElementById('totalPets').textContent = total;
+            document.getElementById('resolvedCases').textContent = resolved;
+            document.getElementById('activeCases').textContent = active;
+        }
+
+        // Datos de ejemplo para demostración
+        function loadExampleData() {
+            if (pets.length === 0) {
+                pets = [
+                    {
+                        id: 1,
+                        status: 'perdido',
+                        species: 'perro',
+                        name: 'Bobby',
+                        description: 'Perro Golden Retriever, dorado, collar azul con chapita. Muy amigable, responde a su nombre.',
+                        zone: 'centro',
+                        contactName: 'María González',
+                        contactMethod: 'whatsapp',
+                        contactInfo: '+54 9 387 123-4567',
+                        date: new Date().toLocaleDateString('es-AR'),
+                        resolved: false,
+                        reports: 0
+                    },
+                    {
+                        id: 2,
+                        status: 'encontrado',
+                        species: 'gato',
+                        name: '',
+                        description: 'Gata tricolor (blanco, negro y naranja), muy pequeña, aproximadamente 3 meses. Sin collar.',
+                        zone: 'norte',
+                        contactName: 'Juan Pérez',
+                        contactMethod: 'email',
+                        contactInfo: 'juan.perez@email.com',
+                        date: new Date().toLocaleDateString('es-AR'),
+                        resolved: false,
+                        reports: 0
+                    },
+                    {
+                        id: 3,
+                        status: 'perdido',
+                        species: 'perro',
+                        name: 'Luna',
+                        description: 'Perra mestiza mediana, negra con manchas blancas en el pecho. Collar rojo con cascabel.',
+                        zone: 'sur',
+                        contactName: 'Ana Rodríguez',
+                        contactMethod: 'whatsapp',
+                        contactInfo: '+54 9 387 987-6543',
+                        date: new Date().toLocaleDateString('es-AR'),
+                        resolved: true,
+                        reports: 0
+                    }
+                ];
+                savePets();
+            }
+        }
+
+        // Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'patitas-v1';
+                    const urlsToCache = [
+                        '/',
+                        '/manifest.json'
+                    ];
+
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(urlsToCache))
+                        );
+                    });
+
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then((registration) => {
+                        console.log('Service Worker registrado:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('Error registrando Service Worker:', error);
+                    });
+            });
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPets();
+            loadExampleData();
+            updateStats();
+            renderPets();
+            
+            // Auto-refresh cada 5 minutos
+            setInterval(() => {
+                updateStats();
+                renderPets();
+            }, 300000);
+        });
+
+        // Búsqueda en tiempo real
+        document.getElementById('searchQuery').addEventListener('input', filterPets);
+
+        // Prevención de spam: límite de envíos
+        let lastSubmission = 0;
+        document.getElementById('petForm').addEventListener('submit', function(e) {
+            const now = Date.now();
+            if (now - lastSubmission < 60000) { // 1 minuto entre envíos
+                e.preventDefault();
+                alert('⏱️ Por favor espera un minuto antes de enviar otro reporte.');
+                return false;
+            }
+            lastSubmission = now;
+        });
+
+        // Detección de contenido inapropiado básico
+        function containsInappropriateContent(text) {
+            const inappropriateWords = ['spam', 'venta', 'compra', 'dinero', 'premio'];
+            return inappropriateWords.some(word => 
+                text.toLowerCase().includes(word)
+            );
+        }
+
+        // Validación adicional en el formulario
+        document.getElementById('petDescription').addEventListener('blur', function() {
+            if (containsInappropriateContent(this.value)) {
+                alert('⚠️ El contenido parece inapropiado. Por favor, enfócate en la descripción de la mascota.');
+                this.focus();
+            }
+        });
+    </script>
+</body>
+</html>
