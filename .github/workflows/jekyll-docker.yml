@@ -22,9 +22,9 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
-        uses: docker://jekyll/builder:latest
+        uses: jekyll/builder:latest
         with:
-          args: /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+          args: jekyll build --future
 
       # 👉 Subir el sitio compilado como artifact para Pages
       - name: Upload artifact
