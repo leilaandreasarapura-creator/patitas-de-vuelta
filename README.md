@@ -28,4 +28,13 @@ PATITAS DE VUELTA ayuda a reunir mascotas con sus familias durante eventos masiv
 ## 🚀 Cómo ejecutar localmente
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/tu-usuario/patitas-de-vuelta.git
+git clone https://github.com/leilaandreasarapura-creator/patitas-de-vuelta.git
+
+## 🌐 Demo en Vivo
+**Visita la aplicación:** https://leilaandreasarapura-creator.github.io/patitas-de-vuelta/
+
+## 📂 Repositorio
+**Código fuente:** https://github.com/leilaandreasarapura-creator/patitas-de-vuelta
+
+---
+*Desarrollado para ayudar a reunir mascotas perdidas con sus familias* 🐾
