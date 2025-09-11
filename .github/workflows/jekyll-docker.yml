@@ -26,16 +26,11 @@ jobs:
         with:
           args: /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
 
-      # 👉 Subir el sitio compilado como artifact general
+      # 👉 Subir el sitio compilado como artifact para Pages
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: ./_site
-
-      # 👉 Subir el artifact para GitHub Pages
-      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
 
   # 🚀 Job de deploy
   deploy:
@@ -45,3 +40,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
